@@ -10,7 +10,8 @@ df = pd.read_csv("spotify-dataset.csv")
 listened_songs = random.sample(list(df["title"]), 3)
 unlistened_songs = random.sample(list(set(df["title"]).difference(set(listened_songs))), 3)
 
-print(listened_songs, unlistened_songs)
+print("Listened songs: ", listened_songs)
+print("Unlistened songs: ", unlistened_songs)
 
 # Create a list of 100 playlists with each 50 random songs
 playlists = [random.sample(list(df["title"]), 50) for _ in range(100)]
@@ -24,3 +25,5 @@ for playlist in playlists:
  
 # Select 5 songs from the playlist that are not in the listened songs
 suggested_songs = [song for song in playlist if song not in listened_songs][:5]
+
+print("Suggested songs: ", suggested_songs)
