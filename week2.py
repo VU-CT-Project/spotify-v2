@@ -25,13 +25,27 @@ threshold = 50
 # Initialize a counter for each genre of music into a dictionary
 genre_count = {"pop": 0, "rock": 0, "techno": 0}
 
+#Define the subgenres of pop, rock, and techno
+pop_subgenres = ['electro','danish pop','moroccan pop','colombian pop','candy pop','canadian pop','australian pop','chicago rap','acoustic pop','baroque pop','atl hip hop','hip hop','folk-pop','french indie pop','detroit hip hop','dance pop','canadian hip hop','art pop','pop','barbadian pop','hip pop','metropopolis','hollywood','tropical house','escape room','indie pop','latin','british soul','electropop','irish singer-songwriter','canadian latin','boy band','australian hip hop','australian dance','house']
+ 
 
-# Iterate over rows in data
+rock_subgenres = ['alaska indie','permanent wave','canadian contemporary r&b','contemporary country','celtic rock','alternative r&b']
+
+techno_subgenres = ['complextro','electronic trap','electro house','belgian edm','big room','neo mellow','brostep','edm','downtempo']
+
+
+#Take into account the subgenres of pop, rock, and techno
 for index, row in data.iterrows():
     # Check the genre of each song and increment the appropriate counter
     for genre in row["the genre of the track"].split(", "):
-      if genre in genre_count:
-        genre_count[genre] += 1
+      if genre in pop_subgenres:
+        genre_count["pop"] += 1
+      if genre in rock_subgenres:
+        genre_count["rock"] += 1
+      if genre in techno_subgenres:
+        genre_count["techno"] += 1
+
+
     
 # Initialize variable to store total number of songs listened to by user
 total_songs = 0
