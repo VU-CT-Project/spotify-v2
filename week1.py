@@ -1,4 +1,11 @@
-# Week 1 of the Spotify Playlist Generator project
+""" Week 1
+Steps:
+    1. Read the data from the spotify-dataset.csv file and store it in a variable called df.
+    2. Create a list of 3 listened songs and 3 unlistened songs.
+    3. Create a list of 100 playlists with each 50 random songs.
+    4. Find the playlist that contains 3 listened and 3 unlistened songs.
+    5. Select 5 songs from the playlist that are not in the listened songs.
+"""
 
 import pandas as pd
 import random
