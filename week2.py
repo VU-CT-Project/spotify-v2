@@ -1,40 +1,84 @@
-
-
-"""
-
+""" Week 2
 Steps:
-
-1.Read the data from the spotify-dataset.csv file and store it in a variable called data.
-2.Iterate over the rows in data and count the number of times the user has listened to each of the three genres of music (pop, rock, and techno).
-3.Calculate the percentage of songs listened to for each music genre by dividing the number of songs listened to for that genre by the total number of songs listened to by the user.
-4.If the percentage difference between the user's two favorite genres is less than 10%, consider both genres to be equally important to the user.
-5.Use the user's favorite genre(s) to suggest 5 songs from that genre.
-
+    1.Read the data from the spotify-dataset.csv file and store it in a variable called data.
+    2.Iterate over the rows in data and count the number of times the user has listened to each of the three genres of music (pop, rock, and techno).
+    3.Calculate the percentage of songs listened to for each music genre by dividing the number of songs listened to for that genre by the total number of songs listened to by the user.
+    4.If the percentage difference between the user's two favorite genres is less than 10%, consider both genres to be equally important to the user.
+    5.Use the user's favorite genre(s) to suggest 5 songs from that genre.
 """
 
-
-# Import necessary libraries
 import pandas as pd
 
-# Read in data from spotify-dataset.csv file
+# read dataset
 data = pd.read_csv("spotify-dataset.csv")
 
 # Set threshold for genre importance
 threshold = 50
 
-# Initialize a counter for each genre of music into a dictionary
+# counter for each genre of music
 genre_count = {"pop": 0, "rock": 0, "techno": 0}
 
-#Define the subgenres of pop, rock, and techno
-pop_subgenres = ['electro','danish pop','moroccan pop','colombian pop','candy pop','canadian pop','australian pop','chicago rap','acoustic pop','baroque pop','atl hip hop','hip hop','folk-pop','french indie pop','detroit hip hop','dance pop','canadian hip hop','art pop','pop','barbadian pop','hip pop','metropopolis','hollywood','tropical house','escape room','indie pop','latin','british soul','electropop','irish singer-songwriter','canadian latin','boy band','australian hip hop','australian dance','house']
- 
+# subgenres of pop, rock, and techno
+pop_subgenres = [
+    'electro',
+    'danish pop',
+    'moroccan pop',
+    'colombian pop',
+    'candy pop',
+    'canadian pop',
+    'australian pop',
+    'chicago rap',
+    'acoustic pop',
+    'baroque pop',
+    'atl hip hop',
+    'hip hop',
+    'folk-pop',
+    'french indie pop',
+    'detroit hip hop',
+    'dance pop',
+    'canadian hip hop',
+    'art pop',
+    'pop',
+    'barbadian pop',
+    'hip pop',
+    'metropopolis',
+    'hollywood',
+    'tropical house',
+    'escape room',
+    'indie pop',
+    'latin',
+    'british soul',
+    'electropop',
+    'irish singer-songwriter',
+    'canadian latin',
+    'boy band',
+    'australian hip hop',
+    'australian dance',
+    'house',
+]
 
-rock_subgenres = ['alaska indie','permanent wave','canadian contemporary r&b','contemporary country','celtic rock','alternative r&b']
+rock_subgenres = [
+    'alaska indie',
+    'permanent wave',
+    'canadian contemporary r&b',
+    'contemporary country',
+    'celtic rock',
+    'alternative r&b',
+]
 
-techno_subgenres = ['complextro','electronic trap','electro house','belgian edm','big room','neo mellow','brostep','edm','downtempo']
+techno_subgenres = [
+    'complextro',
+    'electronic trap',
+    'electro house',
+    'belgian edm',
+    'big room',
+    'neo mellow',
+    'brostep',
+    'edm',
+    'downtempo',
+]
 
-
-#Take into account the subgenres of pop, rock, and techno
+# Take into account the subgenres of pop, rock, and techno
 for index, row in data.iterrows():
     # Check the genre of each song and increment the appropriate counter
     for genre in row["the genre of the track"].split(", "):
@@ -45,8 +89,6 @@ for index, row in data.iterrows():
       if genre in techno_subgenres:
         genre_count["techno"] += 1
 
-
-    
 # Initialize variable to store total number of songs listened to by user
 total_songs = 0
 
@@ -57,7 +99,6 @@ for genre, count in genre_count.items():
 # Calculate percentage of songs listened to for each genre 
 for genre, count in genre_count.items():
     genre_count[genre] = count / total_songs * 100
-
 
 # Determine user's favorite genre(s)
 favorite_genres = []
@@ -86,4 +127,3 @@ for index, row in data.iterrows():
 
 # Print suggested songs
 print(suggested_songs)
-
