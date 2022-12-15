@@ -37,6 +37,8 @@ _bpm: str = 'Beats.Per.Minute -The tempo of the song'
 _valence: str = 'Valence - The higher the value, the more positive mood for the song'
 _acousticness: str = 'Acousticness - The higher the value the more acoustic the song is'
 
+_popularity: str = 'Popularity- The higher the value the more popular the song is'
+
 # Iterate through the data on the user's listening history and calculate the average energy, danceability, bpm, valence, and acousticness of the songs they have listened to.
 for index, row in data.iterrows():
     energy += row[_energy]
@@ -78,6 +80,9 @@ for type in types:
         and song[_bpm] in range(bpm - threshold, bpm + threshold) \
         and song[_acousticness] in range(acousticness - threshold, acousticness + threshold):
             suggested_songs.append(song)
+
+# Sort the suggested songs by popularity
+suggested_songs.sort(key=lambda x: x[_popularity], reverse=True)
 
 # Print the suggested songs
 for song in suggested_songs[:5]:
