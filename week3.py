@@ -17,11 +17,11 @@ data = pd.read_csv("spotify-dataset.csv")
 threshold = 10
 
 # Initialise the type of songs
-happy= []
-party= []
-calming= []
-lounge= []
-types = [happy,party,calming,lounge]
+happy = []
+party = []
+calming = []
+lounge = []
+types = [happy, party, calming, lounge]
 
 # Initialise variables to store the average energy, danceability, bpm, valence, and acousticness of the songs the user has listened to.
 energy = 0
@@ -47,18 +47,18 @@ for index, row in data.iterrows():
 
 
 # Normalize the values
-energy /= len(data)
-danceability /= len(data)
-bpm /= len(data)
-valence /= len(data)
-acousticness /= len(data)
+energy //= len(data)
+danceability //= len(data)
+bpm //= len(data)
+valence //= len(data)
+acousticness //= len(data)
 
 
 # Initialise the suggested songs list
 suggested_songs = []
 
 # Classify the songs in happy, lounge, calming and party by their valence
-for index,row in data.iterrows():
+for index, row in data.iterrows():
     if row[_valence] > 70:
         party.append(row)
     elif row[_valence] > 50:
@@ -72,7 +72,11 @@ for index,row in data.iterrows():
 # Iterate through the types of songs and find the songs that are similar to the user's preferences
 for type in types:
     for song in type:
-        if song[_valence] in range(int(valence - threshold), int(valence + threshold)) and song[_danceability] in range(int(danceability - threshold), int(danceability + threshold)) and song[_energy] in range(int(energy - threshold), int(energy + threshold)) and song[_bpm] in range(int(bpm - threshold), int(bpm + threshold)) and song[_acousticness] in range(int(acousticness - threshold), int(acousticness + threshold)):
+        if song[_valence] in range(valence - threshold, valence + threshold) \
+        and song[_danceability] in range(danceability - threshold, danceability + threshold) \
+        and song[_energy] in range(energy - threshold, energy + threshold) \
+        and song[_bpm] in range(bpm - threshold, bpm + threshold) \
+        and song[_acousticness] in range(acousticness - threshold, acousticness + threshold):
             suggested_songs.append(song)
 
 # Print the suggested songs
