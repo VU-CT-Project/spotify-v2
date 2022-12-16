@@ -8,9 +8,19 @@ Steps:
 """
 
 import pandas as pd
+import random
+import numpy as np
 
 # read dataset
 data = pd.read_csv("spotify-dataset.csv")
+
+#Listened songs (simualtion)
+remove_n = 550
+drop_indices = np.random.choice(data.index, remove_n, replace=False)
+data = data.drop(drop_indices)
+
+
+
 
 # Set threshold for genre importance
 threshold = 50
@@ -121,9 +131,7 @@ for index, row in data.iterrows():
         # Add song to suggested_songs list if the song hasn't already been suggested
         if row["title"] not in suggested_songs:
             suggested_songs.append(row["title"])
-        # Stop suggesting songs once 5 songs have been suggested
-        if len(suggested_songs) == 5:
-            break
+
 
 # Print suggested songs
-print(suggested_songs)
+print(suggested_songs[:5])

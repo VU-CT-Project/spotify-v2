@@ -9,9 +9,16 @@ Steps:
 """
 
 import pandas as pd
+import numpy as np
 
 # Read dataset
 data = pd.read_csv("spotify-dataset.csv")
+
+#Listened songs (simualtion)
+remove_n = 150
+drop_indices = np.random.choice(data.index, remove_n, replace=False)
+data = data.drop(drop_indices)
+
 
 # Initialise the threshold for similarity search
 threshold = 10
